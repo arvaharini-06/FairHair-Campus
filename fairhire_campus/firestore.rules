@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Primitives
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function isSignedIn() { return request.auth != null; }
+    
+    function isValidProfile(data) {
+      return data.candidate_id is string &&
+             data.meritScore is number && data.meritScore >= 0 && data.meritScore <= 100 &&
+             data.reasoning is string && data.reasoning.size() <= 1000 &&
+             data.skills is list && data.skills.size() <= 20 &&
+             data.student_uid is string;
+    }
+
+    function isValidJob(data) {
+      return data.jobId is string &&
+             data.title is string && data.title.size() <= 200 &&
+             data.description is string &&
+             data.recruiter_uid is string;
+    }
+
+    // 1. Users Collection
+    match /users/{uid} {
+      allow get: if true; // Public check for roles
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+
+    // 2. Profiles Collection (Anonymized)
+    match /profiles/{profileId} {
+      allow list: if true; // Recruiter pool
+      allow get: if true;
+      allow create: if isValidProfile(request.resource.data);
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']);
+      allow delete: if true; // Allow removal for demo
+    }
+
+    // 3. Jobs Collection
+    match /jobs/{jobId} {
+      allow list, get: if true;
+      allow create: if isSignedIn() && isValidJob(request.resource.data);
+      allow update, delete: if isSignedIn() && resource.data.recruiter_uid == request.auth.uid;
+    }
+
+    // 4. Applications Collection
+    match /applications/{appId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if true; // Anyone can apply in demo flow
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'feedback']);
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "FairHire Campus",
+  "description": "An AI-powered recruitment platform that anonymizes resumes to ensure fair hiring practices, using Gemini logic for redaction and Firestore for storage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

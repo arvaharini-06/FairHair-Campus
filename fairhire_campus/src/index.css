@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-bg: #F6F7F5;
+  --color-card: #FFFFFF;
+  --color-border: #E0E0E0;
+  --color-text-main: #2F2F2F;
+  --color-text-muted: #5F5F5F;
+  color-scheme: light;
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-card: #1e293b;
+  --color-border: #334155;
+  --color-text-main: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  color-scheme: dark;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary: #6B8F71;
+  --color-primary-hover: #58765D;
+  --color-secondary: #E07A5F;
+  --color-accent: #6B8F71;
+  
+  --color-indigo-50: #F0F4F1;
+  --color-indigo-100: #DAE3DB;
+  --color-indigo-400: #88A68D;
+  --color-indigo-500: #6B8F71;
+  --color-indigo-600: #58765D;
+  --color-indigo-900: #2A382C;
+  
+  --color-bg: var(--color-bg);
+  --color-card: var(--color-card);
+  --color-border: var(--color-border);
+  --color-slate-800: var(--color-text-main);
+  --color-slate-500: var(--color-text-muted);
+  
+  --color-dark-bg: #0f172a;
+  --color-dark-card: #1e293b;
+  --color-dark-border: #334155;
+  --color-dark-text: #f1f5f9;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply bg-bg text-slate-800 font-sans overflow-x-hidden antialiased transition-colors duration-300;
+  }
+}
+
+/* SaaS Style Shadow */
+.shadow-saas {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-slate-800;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}

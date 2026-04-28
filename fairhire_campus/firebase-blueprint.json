@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System user with role-based access",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "recruiter", "college_admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Profile": {
+      "title": "Anonymized Profile",
+      "description": "Technical merit profile without identifiable information",
+      "type": "object",
+      "properties": {
+        "candidate_id": { "type": "string" },
+        "student_uid": { "type": "string" },
+        "meritScore": { "type": "number" },
+        "reasoning": { "type": "string" },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "skill_matrix": { "type": "object", "additionalProperties": { "type": "number" } },
+        "skill_gaps": { "type": "array", "items": { "type": "object" } },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["candidate_id", "student_uid", "meritScore"]
+    },
+    "Job": {
+      "title": "Job Posting",
+      "description": "A job opportunity posted by a recruiter",
+      "type": "object",
+      "properties": {
+        "jobId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "recruiter_uid": { "type": "string" },
+        "required_skills": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["jobId", "title", "description", "recruiter_uid"]
+    },
+    "Application": {
+      "title": "Job Application",
+      "description": "Link between candidate and job",
+      "type": "object",
+      "properties": {
+        "applicationId": { "type": "string" },
+        "jobId": { "type": "string" },
+        "student_uid": { "type": "string" },
+        "candidate_id": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "shortlisted", "rejected"] },
+        "feedback": { "type": "string" },
+        "match_score": { "type": "number" },
+        "match_explanation": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["jobId", "student_uid", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User account information"
+    },
+    "/profiles/{candidate_id}": {
+      "schema": "Profile",
+      "description": "Publicly searchable anonymized profiles"
+    },
+    "/jobs/{jobId}": {
+      "schema": "Job",
+      "description": "Job postings"
+    },
+    "/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Track recruitment progress"
+    }
+  }
+}

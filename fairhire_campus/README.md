@@ -1,20 +1,83 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🎯 FairHire Campus
 
-# Run and deploy your AI Studio app
+An AI-powered campus recruitment platform that ensures **skill-based, bias-free hiring** by analyzing candidate profiles against job descriptions using intelligent matching.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/dd433f72-e7bb-4d91-b937-d0671eb4d8bf
+## 🚀 Live Demo
+https://your-netlify-link.netlify.app
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## 🧠 Problem Statement
 
+Traditional campus hiring is often:
+- Resume-biased
+- College/name influenced
+- Not skill-focused
+- Lacking transparency in shortlisting
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+👉 This leads to unfair rejection before meaningful evaluation.
+
+---
+
+## 💡 Solution
+
+**FairHire Campus** solves this by:
+- Analyzing job descriptions using AI
+- Matching candidate skills objectively
+- Providing fairness-focused recruiter insights
+- Enabling data-driven shortlisting instead of bias
+
+---
+
+## ✨ Key Features
+
+### 👨‍🎓 Student Side
+- Profile-based skill tracking
+- Resume upload & parsing
+- AI-based job matching score
+
+### 🧑‍💼 Recruiter Dashboard
+- Upload job descriptions
+- AI-powered candidate ranking
+- Skill gap analysis
+- Fairness score insights
+
+### 🧠 AI Engine
+- Job description analysis using Gemini API
+- Skill extraction & matching logic
+- Smart scoring system
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React (Vite)
+- **AI Integration:** Google AI Studio (Gemini API)
+- **Database:** Firebase (Firestore + Auth)
+- **Deployment:** Netlify
+- **Version Control:** GitHub
+
+---
+
+## 📊 System Flow
+
+Job Description → AI Analysis → Skill Extraction → Candidate Matching → Ranked Results → Recruiter Dashboard
+
+---
+
+## ⚙️ Installation (Local Setup)
+
+```bash
+# Clone repository
+git clone https://github.com/your-username/fairhire-campus.git
+
+# Navigate to project
+cd fairhire-campus
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev

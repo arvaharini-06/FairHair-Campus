@@ -5,7 +5,7 @@ An AI-powered campus recruitment platform that ensures **skill-based, bias-free 
 ---
 
 ## 🚀 Live Demo
-https://your-netlify-link.netlify.app
+https://fairhire-campus.netlify.app/
 
 ---
 
